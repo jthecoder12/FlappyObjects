@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class TitleScreen extends CommonScreen {
+public final class TitleScreen extends CommonScreen {
     void init() {
 
     }
@@ -45,5 +45,10 @@ public class TitleScreen extends CommonScreen {
     @Override
     public void hide() {
         stage.dispose();
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }

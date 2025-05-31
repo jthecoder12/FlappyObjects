@@ -13,6 +13,7 @@ import jthecoder12.flappyobjects.Main;
 
 public final class LoadingScreen extends CommonScreen {
     private Label nameLabel;
+    private Label infoLabel;
 
     private AsyncExecutor executor;
     private AsyncResult<Void> result;
@@ -21,6 +22,7 @@ public final class LoadingScreen extends CommonScreen {
     @Override
     protected void setPositions() {
         nameLabel.setPosition(Gdx.graphics.getWidth() / 2f - nameLabel.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - nameLabel.getHeight() / 2f);
+        infoLabel.setPosition(Gdx.graphics.getWidth() / 2f - infoLabel.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - infoLabel.getHeight() / 2f - 100);
     }
 
     @Override
@@ -29,10 +31,13 @@ public final class LoadingScreen extends CommonScreen {
         Gdx.input.setInputProcessor(stage);
 
         Label.LabelStyle labelStyle = new Label.LabelStyle(new BitmapFont(Gdx.files.internal("Tiny5/40.fnt")), Color.WHITE);
+
         nameLabel = new Label("JTHECODER12", labelStyle);
+        infoLabel = new Label("Press R to change window size on desktop. Click to enable audio on web.", labelStyle);
 
         setPositions();
         stage.addActor(nameLabel);
+        stage.addActor(infoLabel);
 
         executor = new AsyncExecutor(1, "Load Title Screen");
         titleScreen = new TitleScreen();
@@ -68,5 +73,10 @@ public final class LoadingScreen extends CommonScreen {
     public void hide() {
         executor.dispose();
         stage.dispose();
+    }
+
+    @Override
+    public void dispose() {
+
     }
 }

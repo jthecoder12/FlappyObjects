@@ -14,9 +14,4 @@ public abstract class CommonScreen implements Screen {
         stage.getViewport().update(width, height, true);
         setPositions();
     }
-
-    @Override
-    public void dispose() {
-        hide();
-    }
 }
