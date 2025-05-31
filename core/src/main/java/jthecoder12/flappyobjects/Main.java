@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
 import jthecoder12.flappyobjects.screens.LoadingScreen;
 
@@ -12,6 +13,8 @@ import jthecoder12.flappyobjects.screens.LoadingScreen;
 public final class Main extends Game {
     public static Main INSTANCE;
 
+    public BitmapFont p40;
+    public BitmapFont p60;
     private Sound startupSound;
     private final Array<Screen> screens = new Array<>();
 
@@ -19,9 +22,11 @@ public final class Main extends Game {
     public void create() {
         INSTANCE = this;
 
+        p40 = new BitmapFont(Gdx.files.internal("Tiny5/40.fnt"));
+        p60 = new BitmapFont(Gdx.files.internal("Tiny5/60.fnt"));
         setScreen(new LoadingScreen());
         startupSound = Gdx.audio.newSound(Gdx.files.internal("sounds/beep-03.wav"));
-        startupSound.play();
+        startupSound.play(0.3f);
     }
 
     @Override
@@ -40,6 +45,8 @@ public final class Main extends Game {
         super.dispose();
 
         for(Screen screen1 : screens) screen1.dispose();
+        p40.dispose();
+        p60.dispose();
         startupSound.dispose();
     }
 
