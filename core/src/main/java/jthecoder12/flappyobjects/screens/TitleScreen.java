@@ -44,7 +44,7 @@ public final class TitleScreen extends CommonScreen {
         playButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(button == 0) System.out.println("Clicked");
+                if(button == 0) Main.INSTANCE.setScreen(new GameScreen());
 
                 return true;
             }
