@@ -3,11 +3,16 @@ package jthecoder12.flappyobjects;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import jthecoder12.flappyobjects.screens.LoadingScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public final class Main extends Game {
+    public static Main INSTANCE;
+
     @Override
     public void create() {
+        INSTANCE = this;
+
         setScreen(new LoadingScreen());
     }
 
