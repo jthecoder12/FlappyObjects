@@ -22,4 +22,8 @@ public final class CircleComponent implements Component {
         GameScreen.INSTANCE.shapeRenderer.setColor(color);
         GameScreen.INSTANCE.shapeRenderer.circle(position.x, position.y, radius);
     }
+
+    public float getRadius() {
+        return radius;
+    }
 }
