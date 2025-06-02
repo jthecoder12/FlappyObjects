@@ -2,16 +2,22 @@ package jthecoder12.flappyobjects.entities;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Disposable;
 import jthecoder12.flappyobjects.components.CircleComponent;
 import jthecoder12.flappyobjects.components.PlayerPhysicsComponent;
 import jthecoder12.flappyobjects.components.PositionComponent;
 
-public final class Player extends Entity {
+public final class Player extends Entity implements Disposable {
+    private final Sound jumpSound;
+
     public Player(World world) {
+        jumpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/SFX_Jump_09.wav"));
+
         PositionComponent positionComponent = new PositionComponent();
-        positionComponent.getPosition().set(400, 400);
+        positionComponent.getPosition().set(Gdx.graphics.getWidth() / 4.8f, Gdx.graphics.getHeight() / 2.7f);
         add(positionComponent);
         add(new CircleComponent(this, 15, Color.YELLOW));
         add(new PlayerPhysicsComponent(this, world));
@@ -21,6 +27,14 @@ public final class Player extends Entity {
         getComponent(CircleComponent.class).render();
         getComponent(PlayerPhysicsComponent.class).update();
 
-        if(Gdx.input.justTouched()) getComponent(PlayerPhysicsComponent.class).applyForce();
+        if(Gdx.input.justTouched()) {
+            jumpSound.play();
+            getComponent(PlayerPhysicsComponent.class).applyForce();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        jumpSound.dispose();
     }
 }

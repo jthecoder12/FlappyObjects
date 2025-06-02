@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
+import com.kotcrab.vis.ui.VisUI;
 import jthecoder12.flappyobjects.screens.LoadingScreen;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
@@ -22,6 +23,7 @@ public final class Main extends Game {
     public void create() {
         INSTANCE = this;
 
+        VisUI.load();
         p40 = new BitmapFont(Gdx.files.internal("Tiny5/40.fnt"));
         p60 = new BitmapFont(Gdx.files.internal("Tiny5/60.fnt"));
         setScreen(new LoadingScreen());
@@ -45,6 +47,7 @@ public final class Main extends Game {
         super.dispose();
 
         for(Screen screen1 : screens) screen1.dispose();
+        VisUI.dispose();
         p40.dispose();
         p60.dispose();
         startupSound.dispose();

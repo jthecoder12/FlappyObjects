@@ -67,6 +67,7 @@ public final class GameScreen extends CommonScreen {
     public void hide() {
         clickSound.dispose();
         world.dispose();
+        player.dispose();
         shapeRenderer.dispose();
         stage.dispose();
     }
