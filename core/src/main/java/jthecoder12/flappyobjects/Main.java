@@ -19,6 +19,7 @@ public final class Main extends Game {
     private Sound startupSound;
     private final Array<Screen> screens = new Array<>();
 
+
     @Override
     public void create() {
         INSTANCE = this;
@@ -36,7 +37,7 @@ public final class Main extends Game {
         super.render();
 
         // If R is pressed and the backend is LWJGL3 (we check using getSimpleName() as instanceof requires the actual class to be passed in which may not work on the GWT version) and then sets the resolution to 1280x720
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R) && Gdx.graphics.getClass().getSimpleName().equals("Lwjgl3Graphics"))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R) && Gdx.graphics.getClass().getSimpleName().equals("Lwjgl3Graphics") && !getScreen().getClass().getSimpleName().equals("GameScreen"))
             if(Gdx.graphics.getWidth() == 1280) Gdx.graphics.setWindowedMode(1920, 1080);
             else Gdx.graphics.setWindowedMode(1280, 720);
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import jthecoder12.flappyobjects.entities.PipeGroup;
 import jthecoder12.flappyobjects.entities.Player;
 
 public final class GameScreen extends CommonScreen {
@@ -15,8 +16,9 @@ public final class GameScreen extends CommonScreen {
     public static GameScreen INSTANCE;
 
     public ShapeRenderer shapeRenderer;
+    public Player player;
     private Sound clickSound;
-    private Player player;
+    private PipeGroup pipeGroup;
 
     private World world;
 
@@ -37,6 +39,8 @@ public final class GameScreen extends CommonScreen {
 
         stage = new Stage(new ScreenViewport());
         player = new Player(world);
+
+        pipeGroup = new PipeGroup();
     }
 
     @Override
@@ -48,6 +52,10 @@ public final class GameScreen extends CommonScreen {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         player.update();
         shapeRenderer.end();
+
+        stage.getBatch().begin();
+        pipeGroup.update(stage.getBatch());
+        stage.getBatch().end();
 
         stage.act(delta);
         stage.draw();
@@ -67,6 +75,7 @@ public final class GameScreen extends CommonScreen {
     public void hide() {
         clickSound.dispose();
         world.dispose();
+        pipeGroup.dispose();
         player.dispose();
         shapeRenderer.dispose();
         stage.dispose();
