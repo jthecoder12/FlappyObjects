@@ -33,6 +33,6 @@ public final class PlayerPhysicsComponent implements Component {
     }
 
     public void applyForce() {
-        body.applyForce(new Vector2(0, 100000000), entity.getComponent(PositionComponent.class).getPosition(), true);
+        body.applyForce(new Vector2(0, 1000000000), entity.getComponent(PositionComponent.class).getPosition(), true);
     }
 }

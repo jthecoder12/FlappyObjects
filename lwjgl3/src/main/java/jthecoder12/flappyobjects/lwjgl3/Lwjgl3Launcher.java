@@ -4,6 +4,11 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import jthecoder12.flappyobjects.Main;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.system.Platform;
+
+import static org.lwjgl.glfw.GLFW.GLFW_PLATFORM;
+import static org.lwjgl.glfw.GLFW.GLFW_PLATFORM_X11;
+import static org.lwjgl.glfw.GLFW.glfwInitHint;
 
 /** Launches the desktop (LWJGL3) application. */
 public final class Lwjgl3Launcher {
@@ -17,6 +22,9 @@ public final class Lwjgl3Launcher {
     }
 
     private static @NotNull Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
+        // By default, if supported, GLFW uses Wayland on Linux and FreeBSD (not supported). Wayland restricts certain window features so we use X11.
+        if(Platform.get() == Platform.LINUX) glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_X11);
+
         Lwjgl3ApplicationConfiguration configuration = new Lwjgl3ApplicationConfiguration();
         configuration.setTitle("Flappy Objects");
         //// Vsync limits the frames per second to what your hardware can display, and helps eliminate

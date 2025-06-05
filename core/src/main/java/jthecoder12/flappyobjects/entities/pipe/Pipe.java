@@ -1,4 +1,4 @@
-package jthecoder12.flappyobjects.entities;
+package jthecoder12.flappyobjects.entities.pipe;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,8 +10,9 @@ import jthecoder12.flappyobjects.components.TextureCollider;
 import jthecoder12.flappyobjects.components.TextureComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
 
-final class Pipe extends Entity implements Disposable {
+public final class Pipe extends Entity implements Disposable {
     private final Texture pipeTexture;
+    float height;
 
     enum PipeDirection {
         TOP,
@@ -32,9 +33,13 @@ final class Pipe extends Entity implements Disposable {
         getComponent(PositionComponent.class).getPosition().sub(2.25f, 0);
 
         getComponent(TextureCollider.class).update();
-        getComponent(TextureComponent.class).draw(batch);
+        getComponent(TextureComponent.class).draw(batch, height);
 
         if(getComponent(TextureCollider.class).checkWithCircle(GameScreen.INSTANCE.player.getComponent(CircleCollider.class))) System.out.println("You lose");
+    }
+
+    public float getHeight() {
+        return height;
     }
 
     @Override

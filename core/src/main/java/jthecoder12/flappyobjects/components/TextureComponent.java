@@ -16,8 +16,8 @@ public final class TextureComponent implements Component {
         this.texture = texture;
     }
 
-    public void draw(@NotNull Batch batch) {
-        batch.draw(texture, entity.getComponent(PositionComponent.class).getPosition().x, entity.getComponent(PositionComponent.class).getPosition().y, texture.getWidth(), texture.getHeight() * (Gdx.graphics.getHeight() / 1080f));
+    public void draw(@NotNull Batch batch, float height) {
+        batch.draw(texture, entity.getComponent(PositionComponent.class).getPosition().x, entity.getComponent(PositionComponent.class).getPosition().y, texture.getWidth(), texture.getHeight() * (Gdx.graphics.getHeight() / 1080f) * height);
     }
 
     public Texture getTexture() {
