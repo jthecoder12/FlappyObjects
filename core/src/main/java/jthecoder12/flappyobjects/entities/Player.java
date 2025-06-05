@@ -13,10 +13,11 @@ import jthecoder12.flappyobjects.components.PositionComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
 
 public final class Player extends Entity implements Disposable {
-    private final Sound jumpSound;
+    private final Sound jumpSound, hitSound;
 
     public Player(World world) {
         jumpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/SFX_Jump_09.wav"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hit.ogg"));
 
         PositionComponent positionComponent = new PositionComponent();
         positionComponent.getPosition().set(Gdx.graphics.getWidth() / 4.8f, Gdx.graphics.getHeight() / 2.7f);
@@ -35,10 +36,17 @@ public final class Player extends Entity implements Disposable {
             jumpSound.play();
             getComponent(PlayerPhysicsComponent.class).applyForce();
         }
+
+        float yPos = getComponent(PositionComponent.class).getPosition().y;
+        if((yPos >= Gdx.graphics.getHeight() || yPos <= 0) && GameScreen.INSTANCE.running) {
+            hitSound.play();
+            GameScreen.INSTANCE.running = false;
+        }
     }
 
     @Override
     public void dispose() {
         jumpSound.dispose();
+        hitSound.dispose();
     }
 }
