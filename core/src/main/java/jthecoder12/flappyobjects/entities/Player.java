@@ -17,7 +17,7 @@ public final class Player extends Entity implements Disposable {
 
     public Player(World world) {
         jumpSound = Gdx.audio.newSound(Gdx.files.internal("sounds/SFX_Jump_09.wav"));
-        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hit.ogg"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/Hit.wav"));
 
         PositionComponent positionComponent = new PositionComponent();
         positionComponent.getPosition().set(Gdx.graphics.getWidth() / 4.8f, Gdx.graphics.getHeight() / 2.7f);

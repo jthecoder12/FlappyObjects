@@ -32,7 +32,7 @@ public final class Pipe extends Entity implements Disposable {
         add(new SpriteComponent(this, pipeTexture, height));
         add(new SpriteCollider(this));
 
-        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hit.ogg"));
+        hitSound = Gdx.audio.newSound(Gdx.files.internal("sounds/Hit.wav"));
     }
 
     void update(Batch batch) {

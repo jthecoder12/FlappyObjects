@@ -37,7 +37,7 @@ public final class TitleScreen extends CommonScreen {
         Gdx.input.setInputProcessor(stage);
 
         // Textures can't be created in the async init method
-        Texture playButtonTexture = new Texture(Gdx.files.internal("textures/playbutton.png"));
+        Texture playButtonTexture = new Texture(Gdx.files.internal("textures/buttons/playbutton.png"));
         textures.add(playButtonTexture);
         playButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(playButtonTexture)));
         playButton.setSize(playButton.getWidth() / 1.5f, playButton.getHeight() / 1.5f);
