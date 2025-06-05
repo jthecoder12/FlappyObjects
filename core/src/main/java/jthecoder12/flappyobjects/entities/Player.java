@@ -10,6 +10,7 @@ import jthecoder12.flappyobjects.components.CircleCollider;
 import jthecoder12.flappyobjects.components.CircleComponent;
 import jthecoder12.flappyobjects.components.PlayerPhysicsComponent;
 import jthecoder12.flappyobjects.components.PositionComponent;
+import jthecoder12.flappyobjects.screens.GameScreen;
 
 public final class Player extends Entity implements Disposable {
     private final Sound jumpSound;
@@ -30,7 +31,7 @@ public final class Player extends Entity implements Disposable {
         getComponent(CircleCollider.class).update();
         getComponent(PlayerPhysicsComponent.class).update();
 
-        if(Gdx.input.justTouched()) {
+        if(Gdx.input.justTouched() && GameScreen.INSTANCE.running) {
             jumpSound.play();
             getComponent(PlayerPhysicsComponent.class).applyForce();
         }

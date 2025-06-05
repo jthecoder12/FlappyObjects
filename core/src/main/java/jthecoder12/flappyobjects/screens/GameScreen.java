@@ -23,6 +23,7 @@ public final class GameScreen extends CommonScreen {
     public ShapeRenderer shapeRenderer;
     public Player player;
     public int score;
+    public boolean running = true;
     public Label scoreLabel;
     private Sound clickSound;
 
@@ -82,9 +83,11 @@ public final class GameScreen extends CommonScreen {
             }
         }
 
-        stage.getBatch().begin();
-        for(PipeGroup pipeGroup : pipeGroups) pipeGroup.update(stage.getBatch());
-        stage.getBatch().end();
+        if(running) {
+            stage.getBatch().begin();
+            for(PipeGroup pipeGroup : pipeGroups) pipeGroup.update(stage.getBatch());
+            stage.getBatch().end();
+        }
 
         stage.act(delta);
         stage.draw();

@@ -6,33 +6,29 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import jthecoder12.flappyobjects.components.PositionComponent;
-import jthecoder12.flappyobjects.components.TextureComponent;
+import jthecoder12.flappyobjects.components.SpriteComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
 
 public final class PipeGroup implements Disposable {
     private final Pipe topPipe, bottomPipe;
     private final Sound coinSound;
-    private final float differenceBy;
     private boolean gotPoint = false;
     private boolean requireSpawnNew = true;
 
     public PipeGroup() {
-        topPipe = new Pipe(Pipe.PipeDirection.TOP);
-        bottomPipe = new Pipe(Pipe.PipeDirection.BOTTOM);
+        float differenceBy = MathUtils.random(1, 2f);
+        System.out.println(differenceBy);
 
-        topPipe.getComponent(PositionComponent.class).getPosition().set(Gdx.graphics.getWidth() - topPipe.getComponent(TextureComponent.class).getTexture().getWidth(), Gdx.graphics.getHeight() - topPipe.getComponent(TextureComponent.class).getTexture().getHeight() * (Gdx.graphics.getHeight() / 1080f));
-        bottomPipe.getComponent(PositionComponent.class).getPosition().set(Gdx.graphics.getWidth() - bottomPipe.getComponent(TextureComponent.class).getTexture().getWidth(), 0);
+        topPipe = new Pipe(Pipe.PipeDirection.TOP, differenceBy);
+        bottomPipe = new Pipe(Pipe.PipeDirection.BOTTOM, Gdx.graphics.getHeight() - differenceBy - Gdx.graphics.getHeight() + Gdx.graphics.getHeight() / (Gdx.graphics.getHeight() / 2.35f));
+
+        topPipe.getComponent(PositionComponent.class).getPosition().set(Gdx.graphics.getWidth() - topPipe.getComponent(SpriteComponent.class).getTexture().getWidth(), Gdx.graphics.getHeight() - topPipe.getComponent(SpriteComponent.class).getTexture().getHeight() * (Gdx.graphics.getHeight() / 1080f));
+        bottomPipe.getComponent(PositionComponent.class).getPosition().set(Gdx.graphics.getWidth() - bottomPipe.getComponent(SpriteComponent.class).getTexture().getWidth(), 0);
 
         coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin8.wav"));
-
-        differenceBy = MathUtils.random(1, 2f);
-        System.out.println(differenceBy);
     }
 
     public void update(Batch batch) {
-        topPipe.height = differenceBy;
-        bottomPipe.height = Gdx.graphics.getHeight() - differenceBy - Gdx.graphics.getHeight() + Gdx.graphics.getHeight() / (Gdx.graphics.getHeight() / 2.35f);
-
         topPipe.update(batch);
         bottomPipe.update(batch);
 
