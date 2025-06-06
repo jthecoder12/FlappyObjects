@@ -4,10 +4,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
-import jthecoder12.flappyobjects.components.CircleCollider;
-import jthecoder12.flappyobjects.components.CircleComponent;
+import jthecoder12.flappyobjects.components.colliders.CircleCollider;
+import jthecoder12.flappyobjects.components.shapecomponents.CircleComponent;
 import jthecoder12.flappyobjects.components.PlayerPhysicsComponent;
 import jthecoder12.flappyobjects.components.PositionComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
@@ -38,7 +39,7 @@ public final class Player extends Entity implements Disposable {
         }
 
         float yPos = getComponent(PositionComponent.class).getPosition().y;
-        if((yPos >= Gdx.graphics.getHeight() || yPos <= 0) && GameScreen.INSTANCE.running) {
+        if((yPos >= Gdx.graphics.getHeight() || yPos <= 0) && GameScreen.INSTANCE.running && MathUtils.randomBoolean()) {
             hitSound.play();
             GameScreen.INSTANCE.running = false;
         }

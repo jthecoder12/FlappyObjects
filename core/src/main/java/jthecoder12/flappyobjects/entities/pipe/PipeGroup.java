@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import jthecoder12.flappyobjects.components.PositionComponent;
-import jthecoder12.flappyobjects.components.SpriteComponent;
+import jthecoder12.flappyobjects.components.shapecomponents.SpriteComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
 
 public final class PipeGroup implements Disposable {

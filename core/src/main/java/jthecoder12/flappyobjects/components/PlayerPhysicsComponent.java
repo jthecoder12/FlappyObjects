@@ -2,8 +2,10 @@ package jthecoder12.flappyobjects.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import jthecoder12.flappyobjects.components.shapecomponents.CircleComponent;
 import org.jetbrains.annotations.NotNull;
 
 public final class PlayerPhysicsComponent implements Component {
@@ -33,6 +35,6 @@ public final class PlayerPhysicsComponent implements Component {
     }
 
     public void applyForce() {
-        body.applyForce(new Vector2(0, 1000000000), entity.getComponent(PositionComponent.class).getPosition(), true);
+        body.applyForce(new Vector2(0, MathUtils.random(10, 60000)), entity.getComponent(PositionComponent.class).getPosition(), true);
     }
 }

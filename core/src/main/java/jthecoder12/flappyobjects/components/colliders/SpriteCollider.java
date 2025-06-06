@@ -1,8 +1,9 @@
-package jthecoder12.flappyobjects.components;
+package jthecoder12.flappyobjects.components.colliders;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Intersector;
+import jthecoder12.flappyobjects.components.shapecomponents.SpriteComponent;
 import jthecoder12.flappyobjects.entities.pipe.Pipe;
 import org.jetbrains.annotations.NotNull;
 

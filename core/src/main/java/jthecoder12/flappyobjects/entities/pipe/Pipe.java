@@ -5,11 +5,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
-import jthecoder12.flappyobjects.components.CircleCollider;
+import jthecoder12.flappyobjects.components.colliders.CircleCollider;
 import jthecoder12.flappyobjects.components.PositionComponent;
-import jthecoder12.flappyobjects.components.SpriteCollider;
-import jthecoder12.flappyobjects.components.SpriteComponent;
+import jthecoder12.flappyobjects.components.colliders.SpriteCollider;
+import jthecoder12.flappyobjects.components.shapecomponents.SpriteComponent;
 import jthecoder12.flappyobjects.screens.GameScreen;
 
 public final class Pipe extends Entity implements Disposable {
@@ -41,9 +42,16 @@ public final class Pipe extends Entity implements Disposable {
 
         getComponent(SpriteComponent.class).draw(batch);
 
-        if(getComponent(SpriteCollider.class).checkWithCircle(GameScreen.INSTANCE.player.getComponent(CircleCollider.class))) {
-            hitSound.play();
-            GameScreen.INSTANCE.running = false;
+        if(getComponent(SpriteCollider.class) != null) {
+            if(getComponent(SpriteCollider.class).checkWithCircle(GameScreen.INSTANCE.player.getComponent(CircleCollider.class))) {
+                if(MathUtils.randomBoolean()) {
+                    hitSound.play();
+                    GameScreen.INSTANCE.running = false;
+                } else {
+                    remove(SpriteCollider.class);
+                    dispose();
+                }
+            }
         }
     }
 

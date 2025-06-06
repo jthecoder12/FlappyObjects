@@ -1,4 +1,4 @@
-package jthecoder12.flappyobjects.components;
+package jthecoder12.flappyobjects.components.shapecomponents;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import jthecoder12.flappyobjects.components.PositionComponent;
 import org.jetbrains.annotations.NotNull;
 
 public final class SpriteComponent implements Component {

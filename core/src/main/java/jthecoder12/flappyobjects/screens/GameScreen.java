@@ -1,6 +1,7 @@
 package jthecoder12.flappyobjects.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -31,7 +32,7 @@ public final class GameScreen extends CommonScreen {
     public int score;
     public boolean running = true;
     public Label scoreLabel;
-    private Label loseLabel;
+    private Label loseLabel, pauseLabel;
     private ImageButton menuButton;
     private Sound clickSound;
     private boolean lost = false;
@@ -78,6 +79,11 @@ public final class GameScreen extends CommonScreen {
         loseLabel.setVisible(false);
         stage.addActor(loseLabel);
 
+        pauseLabel = new Label("Paused", bigLabelStyle);
+        pauseLabel.setPosition(Gdx.graphics.getWidth() / 2f - pauseLabel.getWidth() / 2f, Gdx.graphics.getHeight() / 2f - pauseLabel.getHeight() / 2f);
+        pauseLabel.setVisible(false);
+        stage.addActor(pauseLabel);
+
         Texture menuButtonTexture = new Texture(Gdx.files.internal("textures/buttons/menubutton.png"));
         textures.add(menuButtonTexture);
         menuButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(menuButtonTexture)));
@@ -107,9 +113,11 @@ public final class GameScreen extends CommonScreen {
 
         world.step(1/120f, 6, 2);
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        player.update();
-        shapeRenderer.end();
+        if(!pauseLabel.isVisible()) {
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            player.update();
+            shapeRenderer.end();
+        }
 
         Array.ArrayIterator<PipeGroup> iterator = pipeGroups.iterator();
         while(iterator.hasNext()) {
@@ -122,11 +130,21 @@ public final class GameScreen extends CommonScreen {
         }
 
         if(running) {
-            stage.getBatch().begin();
-            for(PipeGroup pipeGroup : pipeGroups) pipeGroup.update(stage.getBatch());
-            stage.getBatch().end();
+            if(!pauseLabel.isVisible()) {
+                stage.getBatch().begin();
+                shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                for(PipeGroup pipeGroup : pipeGroups) pipeGroup.update(stage.getBatch());
+                shapeRenderer.end();
+                stage.getBatch().end();
+            }
+
+            if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                pauseLabel.setVisible(!pauseLabel.isVisible());
+                menuButton.setVisible(!menuButton.isVisible());
+            }
         } else if(!lost) {
             lost = true;
+            pauseLabel.setVisible(false);
             loseLabel.setVisible(true);
             menuButton.setVisible(true);
         }

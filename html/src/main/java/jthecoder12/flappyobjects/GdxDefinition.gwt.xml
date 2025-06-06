@@ -12,7 +12,6 @@
   <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt" />
   <inherits name="com.badlogic.ashley_gwt" />
   <inherits name="com.badlogic.gdx.physics.box2d.box2d-gwt" />
-  <inherits name="com.kotcrab.vis.vis-ui" />
   <inherits name="jthecoder12.flappyobjects.Main" />
 
   <!-- You must change this if you rename packages later, or rename GwtLauncher. -->

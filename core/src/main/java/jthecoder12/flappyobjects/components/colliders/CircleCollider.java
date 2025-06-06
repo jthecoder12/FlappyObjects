@@ -1,8 +1,10 @@
-package jthecoder12.flappyobjects.components;
+package jthecoder12.flappyobjects.components.colliders;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Circle;
+import jthecoder12.flappyobjects.components.PositionComponent;
+import jthecoder12.flappyobjects.components.shapecomponents.CircleComponent;
 import org.jetbrains.annotations.NotNull;
 
 public final class CircleCollider implements Component {
